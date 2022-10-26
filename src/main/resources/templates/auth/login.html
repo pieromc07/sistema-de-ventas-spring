@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head>
 	<meta charset="UTF-8">
@@ -60,11 +60,10 @@
 						<h4 class="mb-2 text-center">Bienvenido a TecShop! 👋</h4>
 						<p class="mb-4">Porfavor, Inicie sesión y comience la aventura.</p>
 
-						<form id="formAuthentication" class="mb-3" action="#" method="POST">
+						<form id="formAuthentication" class="mb-3" action="login" method="POST">
 							<div class="mb-3">
 								<label for="username" class="form-label">Email</label>
-								<input type="text" class="form-control" id="username" name="username"
-									placeholder="Ingrese Email" autofocus />
+								<input type="email" class="form-control" id="email" name="email" placeholder="Ingrese su email" required autofocus>
 							</div>
 							<div class="mb-3 form-password-toggle">
 								<div class="d-flex justify-content-between">
@@ -76,9 +75,10 @@
 								<div class="input-group input-group-merge">
 									<input type="password" id="password" class="form-control" name="password"
 										placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-										aria-describedby="password" />
+										aria-describedby="password" required />
 									<span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
 								</div>
+								<span th:if="${param.error}" class=" form-text text-danger my-2">Usuario o contraseña invalidas</spanth>
 							</div>
 							<div class="mb-3">
 								<div class="form-check">
@@ -93,7 +93,7 @@
 
 						<p class="text-center">
 							<span>¿Es nuevo en nuestra plataforma?</span>
-							<a href="#">
+							<a href="/register">
 								<span>Crear una cuenta</span>
 							</a>
 						</p>
