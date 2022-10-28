@@ -52,29 +52,23 @@ public class Seeder {
     }
 
     private User buildUser(String email, ERole role) {
-        Role roleEntity = roleRepository.findByDescription(role.getFullRoleName());
-        if (roleEntity == null) {
-           System.out.println("No se encontro el rol");
-        }else{
-            System.out.println("Se encontro el rol");
-        }
-
         return User.builder()
                 .email(email)
                 .password(passwordEncoder.encoder().encode(ADMIN_PASSWORD))
-                .roles(List.of(roleRepository.findByDescription(role.getFullRoleName())))
+                .roles(List.of(roleRepository.findByDescription(role.name())))
                 .build();
     }
 
     private void createRoles(){
         if(roleRepository.count() == 0)
-            roleRepository.saveAll(List.of(buildRole(ERole.ADMIN.getFullRoleName()),buildRole(ERole.VENTA.getFullRoleName())));
+            roleRepository.saveAll(List.of(buildRole(ERole.ADMIN),buildRole(ERole.VENTA)));
         log.info("roles creados ....");
     }
 
-    private com.app.sellingsystem.persistence.model.Role buildRole(String role) {
+    private com.app.sellingsystem.persistence.model.Role buildRole(ERole role) {
         return com.app.sellingsystem.persistence.model.Role.builder()
-                .description(role)
+                .name(role.getFullRoleName())
+                .description(role.name())
                 .build();
     }
 }
