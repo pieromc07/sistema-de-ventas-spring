@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+		xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
 
 <head>
 	<meta charset="UTF-8">
@@ -60,7 +62,9 @@
 						<h4 class="mb-2 text-center">Bienvenido a TecShop! 👋</h4>
 						<p class="mb-4">Porfavor, Inicie sesión y comience la aventura.</p>
 
-						<form id="formAuthentication" class="mb-3" action="login" method="POST">
+						<form id="formAuthentication" class="mb-3" action="login" method="POST"
+						sec:authorize="!isAuthenticated()"
+						>
 							<div class="mb-3">
 								<label for="username" class="form-label">Email</label>
 								<input type="email" class="form-control" id="email" name="email" placeholder="Ingrese su email" required autofocus>
